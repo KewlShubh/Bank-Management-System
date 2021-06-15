@@ -4,9 +4,8 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
-#include<windows.h>
+#include <windows.h>
 
-/*
 void delay(int number_of_seconds)
 {
     // Converting time into milli_seconds
@@ -19,7 +18,7 @@ void delay(int number_of_seconds)
     while (clock() < start_time + milli_seconds)
         ;
 }
-*/
+
 void encdec(int i)
 {
 	char ch;
@@ -111,6 +110,8 @@ int Create_acc(Account_details *Acc_det)
     system("clear");
     printf("Thank you for creating an account!!\n");
     printf("Your account number is:%d\n", Acc_det[i].acc_num);
+    char c = getchar();
+    delay(5);
     encdec(0);
     return 1;
 }
@@ -188,6 +189,7 @@ int Show_acc_det(Account_details *Acc_det)
     }
     if(flag)
         printf("account number not found!\n");
-    
+    char c = getchar();
+    delay(5);
     return 1;
 }
