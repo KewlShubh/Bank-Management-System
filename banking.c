@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "header.h"
 #include <stdlib.h>
-#include <windows.h>
+// #include <windows.h>
 
 int main()
 {
@@ -9,6 +9,9 @@ int main()
     char ch;
     system("clear");
     printf("*************************WELCOME TO DHANI BANK**************************\n");
+    
+    while(1)
+    {
     printf("Please enter one of the option number:\n1.Create A New Account\n2. Check Account Details\n3. NEFT\n4. Apply for Physical Card\n5. Exit\n");
     scanf("%c",&ch);
     
@@ -18,7 +21,9 @@ int main()
         case '2': Show_acc_det(Acc_det);break;
         case '3': printf("Work in Progress\n We'll get back soon :)");break;
         case '4': printf("Work in Progress\n We'll get back soon :)");break;
-        case '5': exit(0);
+        case '5': exit(0);break;
+        case '6': printaccs();break;
         default: printf("Enter a valid number");
+    }
     }
 }
