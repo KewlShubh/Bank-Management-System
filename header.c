@@ -146,10 +146,6 @@ int Show_acc_det(Account_details *Acc_det)
     fflush(stdin);
     scanf("%s", pass);
 
-    printf("**********\n");
-    printf("Account number:%ld\n", acc[m].acc_num);
-    printf("Account number:%ld\n", ac_num);
-    printf("**********\n");
     Account_details *ptr, *endptr;
     ptr = &acc[0];
     endptr = acc +( ( (sizeof(acc)/sizeof(acc[0]))*k ) );
