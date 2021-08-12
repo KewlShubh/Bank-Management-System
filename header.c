@@ -105,6 +105,11 @@ int Create_acc(Account_details *Acc_det)
 
     FILE *fp;
     fp = fopen("accounts.dat", "a");
+    unsigned long len = (unsigned long)ftell(fp);
+    if (len > 0)
+    {
+        encdec(1);
+    } 
     fwrite(&Acc_det[i], sizeof(Account_details), 1, fp);
     fclose(fp);
     system("clear");
@@ -112,19 +117,21 @@ int Create_acc(Account_details *Acc_det)
     printf("Your account number is:%ld\n", Acc_det[i].acc_num);
     char c = getchar();
     delay(5);
-    // encdec(0);
+    encdec(0);
     return 1;
 }
    
 int Show_acc_det(Account_details *Acc_det)
 {
-    // encdec(1);
+    encdec(1);
     Account_details acc[100];
     FILE *fr;
-    int ac_num, m=0, r=2, flag=1;
+    long int ac_num;
+    int m=0, r=2, flag=1;
     char pass[20];
     fr = fopen("accounts.dat", "r");
     int k = 0; 
+    fseek(fr, 0, SEEK_SET);
     while (fread(&acc[k], sizeof(Account_details), 1, fr))
     {
         k++;
@@ -134,15 +141,15 @@ int Show_acc_det(Account_details *Acc_det)
     
     printf("Enter ur account number:\n");
     fflush(stdin);
-    scanf("%d", &ac_num);
+    scanf("%ld", &ac_num);
     printf("Enter password:\n");
     fflush(stdin);
     scanf("%s", pass);
 
     Account_details *ptr, *endptr;
-    ptr = acc;
-    endptr = acc + (sizeof(acc)/sizeof(acc[0]))*k;
-    while (ptr < endptr)
+    ptr = &acc[0];
+    endptr = acc +( ( (sizeof(acc)/sizeof(acc[0]))*k ) );
+    while (ptr <= endptr)
     {
 
         if (acc[m].acc_num == ac_num)
@@ -191,11 +198,13 @@ int Show_acc_det(Account_details *Acc_det)
         printf("account number not found!\n");
     char c = getchar();
     delay(5);
+    encdec(0);
     return 1;
 }
 
 void printaccs()
 {
+    encdec(1);
     Account_details acc[100];
     FILE *fr;
     fr = fopen("accounts.dat", "r");
@@ -211,7 +220,7 @@ void printaccs()
     ptr = acc;
     endptr = acc +( ( (sizeof(acc)/sizeof(acc[0]))*k ) - sizeof(acc)/sizeof(acc[0]) );
     k=0;
-    while (ptr < endptr)
+    while (ptr <= endptr)
     {
         printf("Account holder name:%s\n", acc[k].name);
         printf("Account number:%ld\n", acc[k].acc_num);
@@ -221,4 +230,5 @@ void printaccs()
         k++;
         ptr+=sizeof(acc[0]);
     }
+    encdec(0);
 }
