@@ -232,3 +232,171 @@ void printaccs()
     }
     encdec(0);
 }
+
+void neft()
+{
+    encdec(1);
+    Account_details acc[100];
+    FILE *fr;
+    long int ac_num;
+    int m=0, r=2, flag=1, l=0;
+    char pass[20];
+    fr = fopen("accounts.dat", "r");
+    int k = 0; 
+    fseek(fr, 0, SEEK_SET);
+    while (fread(&acc[k], sizeof(Account_details), 1, fr))
+    {
+        k++;
+    }
+    fclose(fr);
+
+    
+    printf("Enter ur account number:\n");
+    fflush(stdin);
+    scanf("%ld", &ac_num);
+    printf("Enter password:\n");
+    fflush(stdin);
+    scanf("%s", pass);
+    printf("Enter the amount for transfer:\n");
+    fflush(stdin);float amount_trans;
+    scanf("%f",&amount_trans);
+
+
+    printf("Enter receiver account number:\n");
+    fflush(stdin);int ac_rec_num;
+    scanf("%d", &ac_rec_num);
+
+    Account_details *ptr, *endptr, *ptr1, *endptr1;
+    ptr = &acc[0];
+    ptr1 = &acc[0];
+    endptr = acc +( ( (sizeof(acc)/sizeof(acc[0]))*k ) );
+    endptr1 = acc +( ( (sizeof(acc)/sizeof(acc[0]))*k ) );
+    while (ptr <= endptr)
+    {
+
+        if (acc[m].acc_num == ac_num)
+        {
+            flag = 0;
+            while (r)
+            {
+                if(!(strcmp(pass, acc[m].login_pass)) && amount_trans < acc[m].balance)
+                {
+                    printf("\namt transferd successfully\n");
+                    printf("\namt before transaction %f\n", acc[m].balance);
+                    acc[m].balance-=amount_trans;
+                    printf("\namt left %f\n\n", acc[m].balance);
+                    while (ptr1 <= endptr1)
+                    {
+                        if (acc[l].acc_num == ac_rec_num)
+                        {
+                            acc[l].balance+=amount_trans;
+                            FILE *fw;
+                            fw = fopen("accounts.dat", "w");
+                            for(int i =0; i<k; i++)
+                            {
+                                fwrite(&acc[i], sizeof(Account_details), 1, fw);
+                            }
+                            fclose(fw);
+                            break;
+                        }
+                        else{
+                            l++;
+                            ptr1+=sizeof(acc[0]);
+                        }
+                        m++;
+                    }
+                    
+                    break;
+                }
+                else
+                {
+                    if(!(strcmp(pass, acc[m].login_pass)))
+                    {
+                        printf("enter amt agin\n:\n");
+                        fflush(stdin);
+                        scanf("%f", &amount_trans);
+                        if (amount_trans < acc[m].balance)
+                        {
+                            printf("\namt transferd successfully\n");
+                            printf("\namt before transaction %f\n", acc[m].balance);
+                            acc[m].balance-=amount_trans;
+                            printf("\namt left %f\n", acc[m].balance);
+                        while (ptr1 <= endptr1)
+                        {
+                            if (acc[l].acc_num == ac_num)
+                            {
+                                acc[l].balance+=amount_trans;
+                                FILE *ffw;
+                                ffw = fopen("accounts.dat", "w");
+                                for(int i =0; i<k; i++)
+                                {
+                                    fwrite(&acc[i], sizeof(Account_details), 1, ffw);
+                                }
+                                fclose(ffw);
+                                break;
+                            }
+                            else
+                            {
+                                l++;
+                                ptr1+=sizeof(acc[0]);
+                            }
+                            m++;
+                        }
+                            break;
+                        }
+
+                        r--;
+                    }
+                    else
+                    {
+                        printf("you have entered wrong password:\n");
+                        printf("Enter password:\n");
+                        fflush(stdin);
+                        scanf("%s", pass);
+                        if (!(strcmp(pass, acc[m].login_pass)))
+                        {
+                            // m++;
+                            printf("\namt transferd successfully\n");
+                            printf("\namt before transaction %f\n", acc[m].balance);
+                            acc[m].balance-=amount_trans;
+                            printf("\namt left %f\n\n", acc[m].balance);
+                            while (ptr1 <= endptr1)
+                            {
+                                if (acc[l].acc_num == ac_rec_num)
+                                {
+                                    acc[l].balance+=amount_trans;
+                                    FILE *fw;
+                                    fw = fopen("accounts.dat", "w");
+                                    for(int i =0; i<k; i++)
+                                    {
+                                        fwrite(&acc[i], sizeof(Account_details), 1, fw);
+                                    }
+                                    fclose(fw);
+                                    break;
+                                }
+                                else{
+                                    l++;
+                                    ptr1+=sizeof(acc[0]);
+                                }
+                                m++;
+                            }
+                            break;
+                        }
+                    }
+                    --r;
+                }
+            }
+
+        }
+        else
+        {
+            m++;
+        }
+        ptr+=sizeof(acc[0]);
+    }
+    if(flag)
+        printf("account number not found!\n");
+    char c = getchar();
+    delay(5);
+    encdec(0);
+}

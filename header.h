@@ -13,3 +13,4 @@ static int i;
 int Create_acc(Account_details *);
 int Show_acc_det(Account_details *);
 void printaccs();
+void neft();

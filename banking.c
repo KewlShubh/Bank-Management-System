@@ -19,7 +19,7 @@ int main()
     {
         case '1': Create_acc(Acc_det);break;
         case '2': Show_acc_det(Acc_det);break;
-        case '3': printf("Work in Progress\n We'll get back soon :)");break;
+        case '3': neft();break;
         case '4': printf("Work in Progress\n We'll get back soon :)");break;
         case '5': exit(0);break;
         case '6': printaccs();break;
