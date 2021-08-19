@@ -19,22 +19,32 @@ int main()
         switch (ch)
         {
         case '1':
+            system("clear");
             Create_acc(Acc_det);
             break;
         case '2':
+            system("clear");
             Show_acc_det(Acc_det);
             break;
         case '3':
+            system("clear");
             neft();
             break;
         case '4':
-            printf("Work in Progress\n We'll get back soon :)");
+            system("clear");
+            printf("Physical card will be delivered to your nearest branch in 2-3 business working days\nKindly contact your branch manager for tracking status\n");
+            x = getchar();
+            x = getchar();
+            system("clear");
             break;
         case '5':
             exit(0);
             break;
         case '6':
+            system("clear");
             printaccs();
+            x = getchar();
+            x = getchar();
             break;
         default:
             printf("Enter a valid number\n");
