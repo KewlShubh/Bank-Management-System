@@ -5,25 +5,42 @@
 
 int main()
 {
+    char x;
     static Account_details Acc_det[100];
     char ch;
     system("clear");
     printf("*************************WELCOME TO DHANI BANK**************************\n");
-    
-    while(1)
+
+    while (1)
     {
-    printf("Please enter one of the option number:\n1.Create A New Account\n2. Check Account Details\n3. NEFT\n4. Apply for Physical Card\n5. Exit\n");
-    scanf("%c",&ch);
-    
-    switch(ch)
-    {
-        case '1': Create_acc(Acc_det);break;
-        case '2': Show_acc_det(Acc_det);break;
-        case '3': neft();break;
-        case '4': printf("Work in Progress\n We'll get back soon :)");break;
-        case '5': exit(0);break;
-        case '6': printaccs();break;
-        default: printf("Enter a valid number");
-    }
+        printf("Please enter one of the option number:\n1. Create A New Account\n2. Check Account Details\n3. NEFT\n4. Apply for Physical Card\n5. Exit\n");
+        scanf("%c", &ch);
+
+        switch (ch)
+        {
+        case '1':
+            Create_acc(Acc_det);
+            break;
+        case '2':
+            Show_acc_det(Acc_det);
+            break;
+        case '3':
+            neft();
+            break;
+        case '4':
+            printf("Work in Progress\n We'll get back soon :)");
+            break;
+        case '5':
+            exit(0);
+            break;
+        case '6':
+            printaccs();
+            break;
+        default:
+            printf("Enter a valid number\n");
+            x = getchar();
+            x = getchar();
+            system("clear");
+        }
     }
 }

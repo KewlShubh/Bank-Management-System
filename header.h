@@ -3,7 +3,7 @@ typedef struct Account_details
     char name[30];
     char IFSC[20];
     long int acc_num;
-    int contact_number;
+    long int contact_number;
     float balance;
     char login_pass[20];
 } Account_details;
